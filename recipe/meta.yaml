@@ -6,21 +6,21 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/de-abfallnavi-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/de-abfallnavi-{{ version }}.tar.gz
   sha256: ed44fcbbec6d0a99257210c9e46e1a92332429320117ebfc399d3c8a5642ec03
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.6
+    - python {{ python_min }}
     - pip
     - poetry
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - python-dateutil
     - urllib3 >=1.25.3
 
@@ -31,6 +31,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/poschi3/abfallnavi-api
